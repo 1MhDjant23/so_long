@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:34:27 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 13:17:45 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/10 00:48:45 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (check_extension(argv[1]) == -1)
+		{
+			ft_printf("Error\n");
 			return (write(2, "Invalid file\n", 13));
+		}
 		mystruct = (t_long *)malloc(sizeof(t_long));
 		if (!mystruct)
 			exit(write(2, "Alloc Faill\n", 12));

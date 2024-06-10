@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:04:15 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 13:03:54 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:00:18 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	second_layer(t_long *st, mlx_t *X42)
 	}
 	mlx_image_to_window(X42, st->pl, (st->player_y) * 60, (st->player_x) * 60);
 }
- 
+
 void	first_layer(t_long *st, mlx_t *X42)
 {
 	st->i = 0;

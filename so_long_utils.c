@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 10:01:30 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 10:58:23 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/08 00:31:46 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,6 @@ void	faill_textures(t_long *mystruct, int f)
 	exit(write(2, "PNG NOT FOUND\n", 14));
 }
 
-void	free_array(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
-	str = NULL;
-}
-
 void	free_mystruct(t_long *mystruct)
 {
 	int	n;
@@ -114,23 +103,6 @@ void	free_mystruct(t_long *mystruct)
 		free(mystruct->get_line);
 	if (mystruct)
 		free(mystruct);
+	ft_printf("Error\n");
 	exit(write(2, "IV map\n", 7));
-}
-
-void	ex_it(char **str, t_long *game, int x)
-{
-	if (x == 1)
-	{
-		free(*str);
-		free(game);
-		exit(write(2, "IV map\n", 7));
-	}
-	if (x == 2)
-	{
-		free(*str);
-		free(game->get_line);
-		free(game->map);
-		free(game);
-		exit(write(2, "IV map\n", 7));
-	}
 }

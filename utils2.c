@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:32:27 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 11:30:45 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/10 00:49:19 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ int	element_map(t_long *game)
 {
 	game->i = 0;
 	if (count_char(game->first_line) != count_char(game->get_line))
+		return (-1);
+	if (game->get_line[0] != '1' || game->get_line[count_char(game
+				->first_line) - 1] != '1')
 		return (-1);
 	while (game->get_line[game->i] && game->get_line[game->i] != '\n')
 	{
@@ -49,7 +52,7 @@ int	check_extension(char *av)
 	int	i;
 
 	i = 0;
-	if (count_char(av) <= 9)
+	if (count_char(av) == 4 || (ft_memcmp(av, "maps/.ber", 9) == 0))
 		return (-1);
 	while (av[i])
 	{
@@ -61,4 +64,44 @@ int	check_extension(char *av)
 		i++;
 	}
 	return (-1);
+}
+
+void	free_array(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+	str = NULL;
+}
+
+void	ex_it(char **str, t_long *game, int x)
+{
+	if (x == 5)
+	{
+		free(game);
+		ft_printf("Error\n");
+		ft_printf("IV file\n");
+		exit(1);
+	}
+	if (x == 1)
+	{
+		free(*str);
+		close(game->fd);
+		free(game);
+		ft_printf("Error\n");
+		exit(write(2, "IV map\n", 7));
+	}
+	if (x == 2)
+	{
+		free(*str);
+		free(game->get_line);
+		free(game->map);
+		close(game->fd);
+		free(game);
+		ft_printf("Error\n");
+		exit(write(2, "IV map\n", 7));
+	}
 }

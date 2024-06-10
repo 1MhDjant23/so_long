@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:00:17 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/05 23:38:59 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/10 00:49:39 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	element(t_long *game)
 {
 	game->i = 0;
 	if (count_char(game->first_line) != count_char(game->get_line))
+		return (-1);
+	if (game->get_line[0] != '1' || game->get_line[count_char(game
+				->first_line) - 1] != '1')
 		return (-1);
 	while (game->get_line[game->i] && game->get_line[game->i] != '\n')
 	{

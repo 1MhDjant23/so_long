@@ -6,12 +6,12 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 13:06:12 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 12:16:03 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/10 00:47:31 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
- 
+
 void	valid_path(t_long *my, int x, int y)
 {
 	if (my->split[x][y] == '1')
@@ -79,7 +79,7 @@ void	read_file(t_long *game, char *av)
 
 	game->fd = open(av, O_RDONLY);
 	if (game->fd == -1)
-		return (free(game), exit(write(2, "Error\n", 6)));
+		return (ex_it(NULL, game, 5));
 	game->first_line = get_next_line(game->fd);
 	if (check_line(game->first_line) == -1)
 		ex_it(&(game->first_line), game, 1);
@@ -113,5 +113,6 @@ void	checking_map(t_long *game, char *av)
 	if (check_dup_player(game) == -1)
 		ex_it(&(game->first_line), game, 2);
 	find_player(game);
+	close(game->fd);
 	free_array(game->split);
 }

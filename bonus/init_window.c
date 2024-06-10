@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 10:42:30 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 11:31:16 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/09 23:01:14 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	window_init(t_long *my_struct)
 {
 	my_struct->x42 = mlx_init((ft_strlen(my_struct->first_line) - 1) * 60,
-			(my_struct->height_c + 1) * 60, "GAME", false);
+			(my_struct->height_c + 1) * 60, "GAME", true);
 	if (my_struct->x42 == NULL)
 		ex_it(&(my_struct->first_line), my_struct, 2);
 	free(my_struct->first_line);

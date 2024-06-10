@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:19:02 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 12:17:18 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/09 23:04:33 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	path_valid(t_long *my, int x, int y)
 	path_valid(my, x + 1, y);
 	path_valid(my, x - 1, y);
 }
- 
+
 void	find_pos_player(t_long *my)
 {
 	my->f_c = 0;
@@ -83,7 +83,7 @@ void	reading_file(t_long *game, char *av)
 
 	game->fd = open(av, O_RDONLY);
 	if (game->fd == -1)
-		return (free(game), exit(write(2, "Error\n", 6)));
+		return (ex_it(NULL, game, 5));
 	game->first_line = get_next_line(game->fd);
 	if (line_check(game->first_line) == -1)
 		ex_it(&(game->first_line), game, 1);
@@ -117,5 +117,6 @@ void	map_check(t_long *game, char *av)
 	if (check_duplicat(game) == -1)
 		ex_it(&(game->first_line), game, 2);
 	find_pos_player(game);
+	close(game->fd);
 	free_array(game->split);
 }

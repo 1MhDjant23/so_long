@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 17:01:53 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 12:43:45 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/08 11:48:13 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,28 @@ void	free_mystruct(t_long *mystruct)
 		free(mystruct->first_line);
 	if (mystruct->get_line)
 		free(mystruct->get_line);
+	close(mystruct->fd);
 	if (mystruct)
 		free(mystruct);
+	ft_printf("Error\n");
 	exit(write(2, "IV PATH\n", 8));
 }
 
 void	ex_it(char **str, t_long *game, int x)
 {
+	if (x == 5)
+	{
+		free(game);
+		ft_printf("Error\n");
+		ft_printf("IV file\n");
+		exit(1);
+	}
 	if (x == 1)
 	{
 		free(*str);
+		close(game->fd);
 		free(game);
+		ft_printf("Error\n");
 		exit(write(2, "IV map\n", 7));
 	}
 	if (x == 2)
@@ -101,7 +112,9 @@ void	ex_it(char **str, t_long *game, int x)
 		free(*str);
 		free(game->get_line);
 		free(game->map);
+		close(game->fd);
 		free(game);
+		ft_printf("Error\n");
 		exit(write(2, "IV map\n", 7));
 	}
 }

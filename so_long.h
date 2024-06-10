@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:34:46 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 12:56:58 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/09 23:03:55 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "./printf/ft_printf.h"
-# include "./MLX42/include/MLX42/MLX42.h"
+# include "/Users/mait-taj/Desktop/MLX42/include/MLX42/MLX42.h"
 # include "./get_next_line/get_next_line.h"
 
 typedef struct s_long

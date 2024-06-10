@@ -6,7 +6,7 @@
 /*   By: mait-taj <mait-taj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 13:06:10 by mait-taj          #+#    #+#             */
-/*   Updated: 2024/06/06 13:17:58 by mait-taj         ###   ########.fr       */
+/*   Updated: 2024/06/09 23:23:54 by mait-taj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	exten_sion(char *av)
 	int	i;
 
 	i = 0;
-	if (count_char(av) <= 9)
+	if (count_char(av) == 4 || (ft_memcmp(av, "maps/.ber", 9) == 0))
 		return (-1);
 	while (av[i])
 	{
@@ -38,7 +38,10 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (exten_sion(argv[1]) == -1)
+		{
+			ft_printf("Error\n");
 			return (write(2, "Invalid file\n", 13));
+		}
 		mystruct = malloc(sizeof(t_long));
 		if (!mystruct)
 			exit(write(2, "Alloc Faill\n", 12));

@@ -1,32 +1,30 @@
-NAME	:= so_long
+NAME	= so_long
 
-BONUS	:= so_long_bonus
+BONUS	= so_long_bonus
 
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code
 
-LIBMLX	:= ./MLX42
+LIBMLX	= ~/Desktop/MLX42
 
-CC		:= cc
+CC		= cc
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include
+L_HEADER = libft.h
 
-L_HEADER := libft.h
+HEADER = so_long.h
 
-HEADER := so_long.h
+B_HEADER = bonus/so_long_bonus.h
 
-B_HEADER := bonus/so_long_bonus.h
+LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-
-SRCS	:= map_cheking.c so_long_utils.c so_long.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c\
+SRCS	= map_cheking.c so_long_utils.c so_long.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c\
 		layout_win.c move.c	utils2.c logo_exit.c
 
-BNS_SRC	:= bonus/so_long_bonus.c bonus/parsing.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c bonus/utils.c\
+BNS_SRC	= bonus/so_long_bonus.c bonus/parsing.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c bonus/utils.c\
 		bonus/utils_free.c bonus/init_window.c bonus/move_player.c bonus/logo1_exit.c
 
-OBJS	:= ${SRCS:.c=.o}
+OBJS	= ${SRCS:.c=.o}
 
-BNS_OBJ	:= ${BNS_SRC:.c=.o}
+BNS_OBJ	= ${BNS_SRC:.c=.o}
 
 LIBFT = ./libft/libft.a
 
@@ -34,18 +32,18 @@ PRINTF = ./printf/libftprintf.a
 
 ifeq "$(MAKECMDGOALS)" "bonus"
 %.o: %.c $(B_HEADER)
-	$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< 
+	$(CC) $(CFLAGS) -o $@ -c $< 
 else
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 endif
 
-all: $(NAME)
+all: libmlx $(NAME)
 
 libmlx:
 	@(cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4)
 
-$(NAME): logo libmlx $(OBJS)
+$(NAME): logo $(OBJS)
 	@echo "\033[0;33m\n Building the libft library, please wait... \n\033[0m"
 	@make -C ./libft
 	@sleep 1
@@ -54,9 +52,8 @@ $(NAME): logo libmlx $(OBJS)
 	@make -C ./printf
 	@sleep 1
 	@echo "\033[0;36m\n Printf built. \n\033[0m"
-	@echo "\033[0;33m\n Building so_long... \n\033[0m"
 	@sleep 1
-	@($(CC) $(OBJS) $(LIBS) $(LIBFT) $(PRINTF) $(HEADERS) -o $(NAME))
+	@($(CC) $(OBJS) $(LIBS) $(LIBFT) $(PRINTF) -o $(NAME))
 	@echo "\033[0;32m\n =>=>=>=> so_long build completed. <=<=<=<=\n\033[0m"
 
 $(BONUS): libmlx logo $(BNS_OBJ)
@@ -66,7 +63,7 @@ $(BONUS): libmlx logo $(BNS_OBJ)
 	@echo "\033[0;36m\n Libft built. \n\033[0m"
 	@make -C printf
 	@echo "\033[0;36m\n Printf built. \n\033[0m"
-	@($(CC) $(BNS_OBJ) $(LIBS) $(LIBFT) $(PRINTF) $(HEADERS) -o $(BONUS))
+	@($(CC) $(BNS_OBJ) $(LIBS) $(LIBFT) $(PRINTF) -o $(BONUS))
 	@echo "\033[0;32m\n =>=>=>=> so_long_bonus build completed. <=<=<=<=\n\033[0m"
 
 bonus : $(BONUS)
@@ -103,7 +100,7 @@ fclean: clean
 	@sleep 2
 	@echo "\033[0;34m <<< Project Cleaned! >>> \n\033[0m"
 
-re: clean all
+re: fclean all
 	@echo "\033[0;30m rebuilding so_long succed! \n\033[0m"
 
 .PHONY: all, clean, fclean, re, libmlx
